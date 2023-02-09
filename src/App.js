@@ -1,23 +1,11 @@
 import { AppBar, Toolbar } from "@mui/material";
 import { Routes, Route, Navigate } from "react-router-dom";
+import MainPage from "./pages/MainPage";
+import Sub1Page from "./pages/SubPage";
 
-function MainPage() {
-  return (
-    <>
-      <h1>메인 페이지</h1>
-    </>
-  );
-}
 
-function Sub1Page() {
-  return (
-    <>
-      <h1>서브 페이지</h1>
-    </>
-  );
-}
 
-function App() {
+export default function App() {
   return (
   <>
       <AppBar position="static">
@@ -35,5 +23,3 @@ function App() {
   </>
   );
 }
-
-export default App;
