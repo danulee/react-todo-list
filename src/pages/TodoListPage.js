@@ -14,6 +14,20 @@ export default function TodoList() {
     TodoList__filterCompletedIndexAtom
   );
 
+  const getFliteredTodos = () => {
+    if (filterCompletedIndex == 1) {
+      return todosStatus.todos.filter((todo) => !todo.completed);
+    }
+
+    if (filterCompletedIndex == 2) {
+      return todosStatus.todos.filter((todo) => todo.completed);
+    }
+
+    return todosStatus.todos;
+  };
+
+  const filteredTodos = getFliteredTodos();
+
   return (
     <>
       <TodoOptionDrawer status={todoOptionDrawerStatus} />
@@ -54,7 +68,7 @@ export default function TodoList() {
 
       <div className="mt-4 px-4">
         <ul>
-          {todosStatus.todos.map((todo, index) => (
+          {filteredTodos.map((todo, index) => (
             <TodoListItem
               key={todo.id}
               todo={todo}
