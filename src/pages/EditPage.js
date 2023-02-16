@@ -1,13 +1,15 @@
 import { TextField, Button } from "@mui/material";
-import { useParams , Navigate, useNavigate} from "react-router";
+import { Navigate, useNavigate, useParams } from "react-router-dom";
 import { useNoticeSnackbarStatus } from "../components/NoticeSnackbar";
 import { useTodosStatus } from "../hooks";
 
 export default function EditPage() {
   const navigate = useNavigate();
   const { id } = useParams();
+
   const noticeSnackbarStatus = useNoticeSnackbarStatus();
   const todosStatus = useTodosStatus();
+
   const todo = todosStatus.findTodoById(id);
 
   const onSubmit = (e) => {
@@ -15,9 +17,9 @@ export default function EditPage() {
 
     const form = e.target;
 
-    if (form.regDate.value.length == 0) {
+    if (form.performDate.value.length == 0) {
       alert("날짜를 입력해주세요.");
-      form.regDate.focus();
+      form.performDate.focus();
 
       return;
     }
@@ -31,16 +33,16 @@ export default function EditPage() {
 
     const newTodoId = todosStatus.modifyTodoById(
       todo.id,
-      form.regDate.value,
+      form.performDate.value,
       form.content.value
     );
 
-    noticeSnackbarStatus.open(`${todo.id}번 할일이 수정되었습니다.`);
+    noticeSnackbarStatus.open(`${todo.id}번 할 일이 수정되었습니다.`);
 
-    navigate(-1); //되돌아가기
+    navigate(-1);
   };
 
-  const regDateForInput = todo.regDate.substr(0, 16).replace(" ", "T");
+  const performDateForInput = todo.performDate.substr(0, 16).replace(" ", "T");
 
   return (
     <>
@@ -49,8 +51,8 @@ export default function EditPage() {
           label="언제 해야 하나요?"
           focused
           type="datetime-local"
-          name="regDate"
-          defaultValue={regDateForInput}
+          name="performDate"
+          defaultValue={performDateForInput}
         />
         <TextField
           name="content"
